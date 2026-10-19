@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07182c">
+  <meta name="description" content="Đăng ký tài khoản sinh viên trong hệ thống CTU - ATTT.">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>CTU - ATTT | Quản lí tài khoản</title>
+  <link rel="stylesheet" href="user.css">
+  <script src="index.js" defer></script>
+  <script src="user.js" defer></script>
+</head>
+<body>
+  <div class="user-background" aria-hidden="true"></div>
+  <div class="user-overlay" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="images/logo.png" alt="">
+      <span class="brand-label">Hệ thống quản lý tài khoản CTU - ATTT<small>Quản lí tài khoản</small></span>
+    </div>
+    <a class="home-link" href="index.html">Về trang chính</a>
+  </header>
+
+  <main class="user-main">
+    <section class="user-card" aria-labelledby="formTitle">
+      <!-- xác minh email -->
+      <form id="emailStep" class="user-form" novalidate>
+        <h1 id="formTitle">Xác minh email</h1>
+        <label class="field-label" for="studentEmail">Email sinh viên</label>
+        <div class="email-row">
+          <input id="studentEmail" type="email" autocomplete="email" placeholder="ten@student.ctu.edu.vn" required>
+          <button id="sendCode" class="send-code-button" type="button">Gửi email</button>
+        </div>
+        <label class="field-label" for="otpCode">Mã xác minh (8 chữ số)</label>
+        <input id="otpCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="Nhập mã OTP 8 số">
+        <label class="consent-row" for="consent">
+          <input id="consent" type="checkbox">
+          <span>Tôi đồng ý sử dụng email sinh viên để xác minh danh tính và quản lí tài khoản</span>
+        </label>
+        <button class="primary-button" type="submit">Xác minh &amp; tiếp tục</button>
+        <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- tạo hoặc cập nhật tk -->
+      <form id="accountStep" class="user-form" hidden novalidate>
+        <h1>Quản lí tài khoản</h1>
+        <label class="field-label" for="verifiedEmail">Email đã xác minh</label>
+        <input id="verifiedEmail" type="email" readonly>
+        <label class="field-label" for="accountName">Tên đăng nhập mong muốn</label>
+        <input id="accountName" type="text" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" title="Tên tài khoản dài 3–16 ký tự, chỉ gồm chữ không dấu, số và dấu gạch dưới (_)." autocomplete="username" placeholder="Ví dụ: Nguoi_dung1" aria-describedby="accountNameHelp" required>
+        <p id="accountNameHelp" class="field-help">Dùng 3–16 ký tự: chữ không dấu, số hoặc dấu gạch dưới (_). Tên tài khoản không được trùng với tài khoản đã có.</p>
+        <label class="field-label" for="studentPW">Mật khẩu mong muốn (6–20 ký tự)</label>
+        <div class="user-password-control">
+          <input id="studentPW" type="password" minlength="6" maxlength="20" pattern="[\x21-\x7E]{6,20}" title="Mật khẩu dài 6–20 ký tự, không có dấu cách hoặc dấu tiếng Việt." autocomplete="new-password" placeholder="Nhập mật khẩu" aria-describedby="passwordHelp" required>
+          <button id="studentPasswordToggle" class="user-password-toggle" type="button" aria-label="Hiện mật khẩu" aria-controls="studentPW" aria-pressed="false"><img src="images/eye-closed.png" alt=""></button>
+        </div>
+        <p id="passwordHelp" class="field-help">Mật khẩu dài 6-20 ký tự, không có dấu cách hoặc dấu tiếng Việt. Mật khẩu sẽ được moderator xem và được lưu để bạn tra cứu sau khi xác minh email. Không dùng lại mật khẩu quan trọng của bạn ở đây.</p>
+        <button class="primary-button" type="submit">Gửi yêu cầu tài khoản</button>
+        <p id="accountMessage" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- trạng thái yêu cầu đã gửi -->
+      <section id="statusStep" class="status-step" hidden aria-live="polite">
+        <h1>Trạng thái tài khoản</h1>
+        <p><strong>Tài khoản:</strong> <span id="submittedAccount"></span></p>
+        <p><strong>Email:</strong> <span id="submittedEmail"></span></p>
+        <p id="submittedPasswordRow" hidden><strong>Mật khẩu tài khoản: </strong> <span id="submittedPassword"></span> <button id="submittedPasswordToggle" class="password-display-toggle" type="button" aria-label="Hiện mật khẩu tài khoản" aria-controls="submittedPassword" aria-pressed="false"><img src="images/eye-closed.png" alt=""></button></p>
+        <span id="registrationStatusBadge" class="pending-badge" data-status="pending">ĐANG CHỜ DUYỆT</span>
+        <p class="status-copy">Yêu cầu đã được gửi đến quản trị viên và sẽ được xét duyệt thủ công. Quá trình này có thể mất vài ngày tùy theo số lượng yêu cầu đang chờ; tài khoản sẽ được kích hoạt sau khi hoàn tất xét duyệt.</p>
+        <a class="back-link" href="index.html">Quay về trang chủ</a>
+        <p id="statusMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+
+    </section>
+  </main>
+</body>
+</html>
