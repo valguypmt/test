@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="moderator.css">
+  <script src="moderator.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Accounts</h1>
+      <!-- quay lai -->
+      <a href="index.html">Back</a>
+    </header>
+
+    <!-- form thêm/sửa tk -->
+    <form id="addAccountForm">
+      <input id="accountEmail" name="email" type="text" placeholder="Email" aria-label="Email">
+      <input id="accountName" name="accountName" type="text" placeholder="Name" aria-label="Name">
+      <select id="accountStatus" name="status" aria-label="Status">
+        <option value="verified">verified</option>
+        <option value="pending">pending</option>
+        <option value="banned">banned</option>
+      </select>
+      <button type="submit">Add</button>
+      <button id="downloadUsersButton" type="button" hidden>Download JSON</button>
+    </form>
+
+    <!-- tìm trong ds -->
+    <input id="searchInput" type="search" placeholder="Find" aria-label="Find">
+
+    <!-- bảng tài khoản -->
+    <table>
+      <thead>
+        <tr><th>Email</th><th>Name</th><th>Status</th></tr>
+      </thead>
+      <tbody id="usersTableBody"></tbody>
+    </table>
+  </main>
+</body>
+</html>

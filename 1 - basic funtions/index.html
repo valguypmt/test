@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- trang tim tk -->
+  <main>
+    <header>
+      <h1>Accounts</h1>
+      <!-- qua trang edit -->
+      <a href="moderator.html">Edit</a>
+    </header>
+
+    <!-- tra cuu mail -->
+    <form id="searchForm">
+      <input id="searchEmailInput" type="text" placeholder="Email" aria-label="Email">
+      <button type="submit">Find</button>
+    </form>
+
+    <!-- kq, mac dinh an -->
+    <section id="infoView" class="hidden" aria-live="polite">
+      <p id="resEmail"></p>
+      <p id="resAccountName"></p>
+      <p id="resStatusTag"></p>
+    </section>
+  </main>
+</body>
+</html>
