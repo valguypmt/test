@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hệ thống quản lý tài khoản sinh viên CTU - ATTT.">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <title>CTU - ATTT | Hệ thống quản lý tài khoản</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+
+     
+</head>
+<body class="relative min-h-screen">
+
+    
+    <!-- nền trang + lớp phủ đổi độ tối khi cuộn -->
+    <div id="fixedBg" class="fixed-bg">
+        
+        <div id="bgOverlay" class="absolute inset-0 bg-black transition-opacity duration-75" style="opacity: 0.4;"></div>
+    </div>
+
+    
+
+    
+    <!-- tiêu đề + giới thiệu -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+<div class="max-w-4xl mx-auto space-y-6">
+    <h1 class="text-5xl md:text-7xl font-black tracking-tight text-white" 
+        style="text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.82);">
+        Hệ thống quản lý tài khoản sinh viên
+    </h1>
+    <p class="text-lg md:text-xl text-white max-w-xl mx-auto" 
+      style="text-shadow: 0px 2px 12px rgba(0, 0, 0, 0.78); font-weight: 700; font-family: Arial, Helvetica, sans-serif;">
+        CTU - ATTT | 26-27hk1-ct005d05
+    </p>
+    <a class="hero-download-link" href="https://github.com/valguypmt/Project-26-27HK1-CT005D05" target="_blank" rel="noopener noreferrer">
+      Xem mã nguồn mở của dự án trên Github
+    </a>
+
+</div>
+
+    </section>
+    <!-- khu tra cứu tài khoản -->
+    <section>
+
+<div class="lookup-section">
+    <!-- nhập mail và xem kết quả tra cứu -->
+    <h2 class="lookup-title">Tra cứu tài khoản nhanh</h2>
+    <div class="lookup-grid">
+      
+      <div class="lookup-left">
+        <label class="lookup-label" for="searchEmailInput">Email sinh viên</label>
+        <div class="lookup-input-wrapper">
+          <input 
+            type="email" 
+            id="searchEmailInput" 
+            class="lookup-input" 
+            placeholder="ten@student.ctu.edu.vn"
+            autocomplete="username"
+            required
+          >
+        </div>
+        <label class="lookup-label" for="searchPasswordInput">Mật khẩu tài khoản</label>
+        <div class="lookup-input-wrapper">
+          <input
+            type="password"
+            id="searchPasswordInput"
+            class="lookup-input"
+            placeholder="Nhập mật khẩu tài khoản"
+            autocomplete="current-password"
+            required
+          >
+          <button
+            id="searchPasswordToggle"
+            class="lookup-password-toggle"
+            type="button"
+            aria-label="Hiện mật khẩu"
+            aria-controls="searchPasswordInput"
+            aria-pressed="false"
+          >
+            <img src="images/eye-closed.png" alt="">
+          </button>
+        </div>
+        <button class="lookup-btn-search" onclick="handleSearch()">
+          <span>Tra cứu nhanh</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <a class="forgot-password-link" href="user.html">Phản hồi | Quên mật khẩu?</a>
+        <button class="btn-join-big" onclick="window.location.href='user.html'">
+          Đăng ký tài khoản mới!
+        </button>
+      </div>
+
+      
+      <div class="lookup-right">
+        
+        
+        <!-- lời nhắc ban đầu hoặc khi chưa có kq -->
+        <div id="ctaView" class="cta-box">
+          <span id="ctaMsg" class="cta-msg" aria-live="polite">Điền mail và mật khẩu để tra cứu tài khoản nhanh</span>
+        </div>
+
+        
+        <!-- đang tải -->
+        <div id="loadingView" class="hidden">
+          <div class="loader"></div>
+        </div>
+
+        
+        <!-- thông tin tk tìm thấy -->
+        <div id="infoView" class="info-card hidden">
+          <div class="info-field">
+            <div class="info-field-label">Email</div>
+            <div id="resEmail" class="info-field-val">-</div>
+          </div>
+
+          <div class="info-field">
+            <div class="info-field-label">Tên tài khoản</div>
+            <div id="resAccountName" class="info-field-val">-</div>
+          </div>
+
+          <div class="info-field">
+            <div class="info-field-label">Trạng thái tài khoản</div>
+            <div id="resStatusTag" class="status-tag status-pending">Đang chờ</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </section>
+
+
+<div class="transition-blend relative z-20 bg-black rounded-t-[40px] pt-16 shadow-[0_0_80px_rgba(0,0,0,0.95)] flex flex-col items-center">
+
+
+    
+    <div class="container project-intro-wrap">
+      <!-- giới thiệu dự án -->
+      <section class="section-box project-intro" aria-labelledby="projectIntroTitle">
+        <h1 id="projectIntroTitle">Các tính năng nổi bật của Hệ thống</h1>
+        <div class="project-intro-content">
+          <div class="section-copy project-intro-copy">
+            <p>
+              Hệ thống Quản lý Tài khoản Sinh viên CTU - ATTT cung cấp nền tảng tra cứu, xác minh và quản lý dữ liệu an toàn, mượt mà dành cho sinh viên và quản trị viên. Xem video giới thiệu hệ thống hoặc điểm qua 4 tính năng chính dưới đây!<ul>
+              <li><strong>Tra cứu nhanh: </strong>Tìm kiếm thông tin và trạng thái kích hoạt tài khoản sinh viên trực tiếp bằng email @student.ctu.edu.vn</li>
+              <li><strong>Xác minh OTP Email:: </strong>Gửi mã xác thực OTP 8 chữ số bảo mật về hộp thư sinh viên để đảm bảo chính chủ trước khi đăng ký</li>
+              <li><strong>Đăng ký & Phê duyệt: </strong>Khởi tạo yêu cầu tài khoản mới và chuyển vào hàng chờ xét duyệt thủ công bởi Moderator.</li>
+              <li><strong>Dashboard Quản trị: </strong>Trang Admin tích hợp Supabase giúp theo dõi tổng quan, duyệt, sửa hoặc cấm tài khoản nhanh chóng.</li>
+            </ul>
+          </div>
+
+          <div class="project-video-block">
+            <div class="project-video">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/lASLO-tlCmM"
+                title="video"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="project-video-credit">
+              © Video thuộc kênh
+              <a href="https://www.youtube.com/@CTUDHCT" target="_blank" rel="noopener noreferrer">Đại học Cần Thơ</a>.
+              Bản quyền thuộc về chủ sở hữu video.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+    
+    <div class="container section-two-wrap">
+      <!-- hình ảnh hoạt động -->
+      <section class="section-box section-two" aria-labelledby="sectionTwoTitle">
+        <h1 id="sectionTwoTitle">Quy trình & tiêu chuẩn Bảo mật</h1>
+        <div class="section-two-content">
+          <div class="section-two-carousel" role="group" aria-label="Hình ảnh Trường Đại học Cần Thơ" aria-roledescription="carousel">
+            <img
+              class="section-two-image"
+              alt="Hinh1"
+            >
+          </div>
+          <div class="section-copy section-two-copy">
+            <p>
+              Hệ thống áp dụng các tiêu chuẩn an toàn thông tin nhằm bảo vệ dữ liệu sinh viên và đảm bảo chỉ các tài khoản hợp lệ mới được cấp quyền tương ứng.</p>
+            <ul>
+              <li><strong>Xác thực OTP chính chủ: </strong>Yêu cầu xác thực mã OTP 8 chữ số gửi trực tiếp về mail trước khi khởi tạo tài khoản.</li>
+              <li><strong>Phân quyền & Kiểm soát truy cập: </strong>Áp dụng cơ chế phân quyền bảo mật RLS/RPC trên Supabase Database, ngăn chặn mọi truy cập trái phép từ phía client</li>
+              <li><strong>Phê duyệt nhiều lớp: </strong>Mọi yêu cầu đăng ký mới đều được quản trị viên (Moderator) kiểm tra và xét duyệt thủ công trên trang Admin trước khi kích hoạt.</li>
+              <li><strong>Mã hóa dữ liệu phía Supabase: </strong>Mật khẩu được mã hóa và giải mã trực tiếp ở tầng Database (Supabase Crypt) thay vì xử lý bằng JavaScript client, cho phép Moderator tra cứu và cập nhật theo thời gian thực (real-time) an toàn.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <dialog class="image-lightbox" aria-label="Xem ảnh">
+      <div class="image-lightbox-content">
+        <button class="image-lightbox-close" type="button" aria-label="Đóng">×</button>
+        <img class="image-lightbox-main" alt="">
+        <div class="image-lightbox-choices" aria-label="Chọn ảnh">
+          <button class="image-lightbox-choice" type="button" aria-label="Xem toàn cảnh khuôn viên Trường Đại học Cần Thơ" aria-pressed="true">
+            <img src="images/bird.jpg" alt="Hinh1">
+          </button>
+          <button class="image-lightbox-choice" type="button" aria-label="Xem cổng Trường Đại học Cần Thơ" aria-pressed="false">
+            <img src="images/ndh.jpg" alt="Hinh2">
+          </button>
+          <button class="image-lightbox-choice" type="button" aria-label="Xem hình ảnh chim" aria-pressed="false">
+            <img src="images/gate.jpg" alt="Hinh3">
+          </button>
+          <button class="image-lightbox-choice" type="button" aria-label="Xem hình ảnh chim" aria-pressed="false">
+            <img src="images/rlc.jpg" alt="Hinh4">
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+
+
+    
+    <div class="container section-three-wrap">
+      <!-- câu hỏi thường gặp -->
+      <section class="section-box section-three" aria-labelledby="sectionThreeTitle">
+        <h1 id="sectionThreeTitle">Câu hỏi thường gặp</h1>
+        <div class="faq-list">
+          <article class="faq-item">
+            <h2 class="faq-heading">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1" id="faqQuestion1">
+                <span class="faq-question-label"><span class="faq-mark">Q</span> Ai có thể đăng ký tài khoản?</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </button>
+            </h2>
+            <div class="faq-answer" id="faqAnswer1" role="region" aria-labelledby="faqQuestion1" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <p>Hệ thống dành cho sinh viên Trường Đại học Cần Thơ có email sinh viên với tên miền <strong>@student.ctu.edu.vn</strong>.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h2 class="faq-heading">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2" id="faqQuestion2">
+                <span class="faq-question-label"><span class="faq-mark">Q</span> Vì sao cần xác thực email sinh viên?</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </button>
+            </h2>
+            <div class="faq-answer" id="faqAnswer2" role="region" aria-labelledby="faqQuestion2" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <p>Xác thực email giúp xác nhận bạn thuộc cộng đồng sinh viên CTU và bảo vệ tài khoản khỏi các yêu cầu đăng ký không hợp lệ.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h2 class="faq-heading">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3" id="faqQuestion3">
+                <span class="faq-question-label"><span class="faq-mark">Q</span> Tôi chưa nhận được mã OTP, cần làm gì?</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </button>
+            </h2>
+            <div class="faq-answer" id="faqAnswer3" role="region" aria-labelledby="faqQuestion3" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <p>Hãy kiểm tra lại địa chỉ email đã nhập và thư mục Spam/Thư rác. Nếu vẫn chưa nhận được, thử gửi lại mã sau một lúc.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h2 class="faq-heading">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4" id="faqQuestion4">
+                <span class="faq-question-label"><span class="faq-mark">Q</span> Đăng ký xong thì khi nào tài khoản được duyệt?</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </button>
+            </h2>
+            <div class="faq-answer" id="faqAnswer4" role="region" aria-labelledby="faqQuestion4" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <p>Sau khi gửi yêu cầu, tài khoản sẽ ở trạng thái chờ xét duyệt. Quản trị viên cần kiểm tra và phê duyệt trước khi tài khoản được kích hoạt.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h2 class="faq-heading">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer5" id="faqQuestion5">
+                <span class="faq-question-label"><span class="faq-mark">Q</span> Làm sao để kiểm tra trạng thái tài khoản?</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </button>
+            </h2>
+            <div class="faq-answer" id="faqAnswer5" role="region" aria-labelledby="faqQuestion5" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <p>Vào mục tra cứu tài khoản trên trang, nhập email sinh viên đã đăng ký để xem trạng thái hiện tại.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    
+    <!-- chân trang -->
+    <footer class="w-full">
+      <div class="footer-divider"></div>
+      <div class="site-footer">
+        <div class="footer-container">
+          
+          <div class="footer-col">
+              <h3><i class="fa-solid fa-shield-halved"></i> 💻 CẤU HÌNH MÁY CHỦ</h3>
+              <ul>
+                 <li><strong>CPU:</strong> 2x AMD EPYC 9654</li>
+                 <li><strong>RAM:</strong> 24x64GB DDR5 4800MHz ECC</li>
+                 <li><strong>Storage:</strong> 2x SSD 4TB Samsung 990 Pro</li>
+		             <li><strong>OS:</strong> Debian Linux (CLI only)</li>
+              </ul>
+          </div>
+
+          
+          <div class="footer-col">
+              <h3><i class="fa-solid fa-link"></i> 🔗 CÁC ĐƯỜNG DẪN</h3>
+              <ul class="link-list">
+                  <li><a href="https://github.com/valguypmt/Project-26-27HK1-CT005D05" target="_blank">Github của dự án</a></li>
+                  <li><a href="https://www.ctu.edu.vn/" target="_blank">Trang chính thức CTU</a></li>
+                  <li><a href="https://accounts.ctu.edu.vn/" target="_blank">HTQL chính thức CTU</a></li>
+              </ul>
+          </div>
+
+          
+          <div class="footer-col">
+              <h3><i class="fa-solid fa-users"></i> 🛠️ NHÓM THỰC HIỆN</h3>
+              <ul>
+                  <li><strong>Phạm Minh Thông </strong><span class="role">(Phát triển)</span></li>
+                  <li><strong>Phạm Duy Thái </strong><span class="role">(Phát triển)</span></li>
+              </ul>
+          </div>
+
+          
+          <div class="footer-col">
+              <h3><i class="fa-solid fa-comment-dots"></i> 📜 GHI CHÚ</h3>
+              <p class="description">
+                Đây là dự án độc lập của sinh viên, không thuộc CTU. Ảnh khuôn viên lấy từ website CTU; logo và video thuộc chủ sở hữu tương ứng. Việc đăng công khai hoặc ghi nguồn không đồng nghĩa được phép sử dụng lại; vui lòng xác nhận quyền trước khi phân phối.
+              </p>
+          </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Nhóm phát triển dự án | Hệ thống quản lý tài khoản sinh viên</span>
+            <a class="footer-admin-link" href="moderator.html">quản trị viên</a>
+        </div>
+      </div>
+    </footer>
+</div>
+</body>
+
+
+</html>

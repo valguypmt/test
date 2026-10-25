@@ -1,0 +1,43 @@
+// tk test
+
+{
+  "b2605734@student.ctu.edu.vn": {
+    "email": "b2605734@student.ctu.edu.vn",
+    "accountName": "b2605734",
+    "status": "verified"
+  },
+  "b2605464@student.ctu.edu.vn": {
+    "email": "b2605464@student.ctu.edu.vn",
+    "accountName": "b2605464",
+    "status": "pending"
+  },
+  "b2605423@student.ctu.edu.vn": {
+    "email": "b2605423@student.ctu.edu.vn",
+    "accountName": "b2605423",
+    "status": "banned"
+  },
+  "b2607302@student.ctu.edu.vn": {
+    "email": "b2607302@student.ctu.edu.vn",
+    "accountName": "b2607302",
+    "status": "verified"
+  },
+  "b2608237@student.ctu.edu.vn": {
+    "email": "b2608237@student.ctu.edu.vn",
+    "accountName": "b2608237",
+    "status": "pending"
+  },
+  "b2607482@student.ctu.edu.vn": {
+    "email": "b2607482@student.ctu.edu.vn",
+    "accountName": "b2607482",
+    "status": "verified"
+  },
+  "b2603729@student.ctu.edu.vn": {
+    "email": "b2603729@student.ctu.edu.vn",
+    "accountName": "b2603729",
+    "status": "banned"
+  },"b2603463@student.ctu.edu.vn": {
+    "email": "b2603463@student.ctu.edu.vn",
+    "accountName": "b2603463",
+    "status": "verified"
+  }
+}

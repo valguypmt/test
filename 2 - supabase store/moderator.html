@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="moderator.css">
+  <script src="moderator.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Moderator</h1>
+    <a href="index.html">Home</a>
+  </header>
+
+  <main class="workspace">
+    <!-- đăng nhập moderator -->
+    <section id="moderatorLoginPanel">
+      <form id="moderatorLoginForm">
+        <input id="moderatorEmail" type="text" placeholder="Email" autocomplete="username">
+        <input id="moderatorPassword" type="password" placeholder="Password" autocomplete="current-password">
+        <button id="signInButton" type="submit">Sign in</button>
+      </form>
+    </section>
+
+    <!-- khu quản lý tk, mặc định ẩn -->
+    <div id="moderatorWorkspace" hidden>
+      <section>
+        <!-- thêm tk -->
+        <form id="addAccountForm">
+          <input id="accountEmail" name="email" type="text" placeholder="Email">
+          <input id="accountName" name="accountName" type="text" placeholder="Name">
+          <input id="accountPassword" name="password" type="password" placeholder="Password" autocomplete="new-password">
+          <select id="accountStatus" name="status">
+            <option value="verified">Verified</option>
+            <option value="pending">Pending</option>
+            <option value="banned">Banned</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      </section>
+
+      <!-- đổi mật khẩu -->
+      <section id="changePasswordPanel" hidden>
+        <form id="changePasswordForm">
+          <input id="changePasswordEmail" type="text" readonly>
+          <input id="changePasswordValue" type="password" placeholder="New password" autocomplete="new-password">
+          <button id="changePasswordButton" type="submit">Save</button>
+          <button id="cancelChangePasswordButton" type="button">Cancel</button>
+        </form>
+      </section>
+
+      <section>
+        <!-- tìm trong ds -->
+        <input id="searchInput" type="search" placeholder="Search">
+        <div class="table-scroll">
+          <!-- bảng tk -->
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
